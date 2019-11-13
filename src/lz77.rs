@@ -1,3 +1,5 @@
+use alloc::vec::Vec;
+
 const WINDOW_SIZE: usize = 0x1000;
 const WINDOW_MASK: usize = WINDOW_SIZE - 1;
 const THRESHOLD: usize = 3;
@@ -100,10 +102,7 @@ pub fn lz77_compress(input: &[u8]) -> Vec<u8> {
             flag_byte = (flag_byte >> 1) | ((bit & 1u8) << 7);
             current_window = current_window & WINDOW_MASK;
 
-            assert!(current_buffer < MAX_BUFFER,
-                    format!("current buffer {} > max buffer {}",
-                            current_buffer,
-                            MAX_BUFFER));
+            assert!(current_buffer < MAX_BUFFER, "buffer may not exceed a length of 17");
         }
         output.push(flag_byte);
         for i in 0..current_buffer {

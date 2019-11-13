@@ -22,6 +22,10 @@
 //! assert_eq!(data.to_vec(), dec);
 //! ```
 
+#![no_std]
+
+extern crate alloc;
+
 pub mod lz77;
 
 #[cfg(test)]
